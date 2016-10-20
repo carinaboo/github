@@ -23,7 +23,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RepoCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepoCell" rowHeight="221" id="BsL-ZQ-L3d" customClass="RepoCell" customModule="GithubDemo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RepoCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepoCell" id="BsL-ZQ-L3d" customClass="RepoCell" customModule="GithubDemo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="221"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BsL-ZQ-L3d" id="7R9-Zc-iSL">
