@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol RepoSettingsViewControllerDelegate: class {
+    func didSaveSearchSettings(sender: RepoSettingsViewController,
+                               searchSettings: GithubRepoSearchSettings)
+}
+
 class RepoSettingsViewController: UIViewController {
     
-//    var settings: GithubRepoSearchSettings!
+    weak var delegate: RepoSettingsViewControllerDelegate?
+    var searchSettings: GithubRepoSearchSettings!
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -18,37 +24,41 @@ class RepoSettingsViewController: UIViewController {
     @IBOutlet weak var minStarsSlider: UISlider!
     
     @IBAction func minStarsChanged(_ sender: UISlider) {
-        let currentValue = Int(minStarsSlider.value)
-        print("Slider changing to \(currentValue) ?")
-        minStarsLabel.text = "\(currentValue) stars"
+        let minStars = Int(minStarsSlider.value)
+        searchSettings = GithubRepoSearchSettings.init(searchString: self.searchSettings.searchString, minStars: minStars)
+        
+        minStarsLabel.text = floatAsDecimalFormattedString(value:minStars)
     }
     @IBAction func didTapCancel(_ sender: UIButton) {
-        print("cancel")
+        dismiss(animated: true, completion: nil)
     }
     @IBAction func didTapSave(_ sender: UIButton) {
-        print("save")
+        let searchSettings = GithubRepoSearchSettings.init(searchString: self.searchSettings.searchString, minStars: self.searchSettings.minStars)
+        delegate?.didSaveSearchSettings(sender: self, searchSettings: searchSettings)
+        dismiss(animated: true, completion: nil)
     }
-    
-    
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder)
-//        fatalError("init(coder:) has not been implemented")
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         minStarsSlider.minimumValue = 0.0
         minStarsSlider.maximumValue = 100000.0
         minStarsSlider.isContinuous = true
-        minStarsSlider.value = 100.0
         
+        minStarsSlider.value = Float(searchSettings.minStars)
+        minStarsLabel.text = floatAsDecimalFormattedString(value:searchSettings.minStars)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+// MARK: - Private
+    func floatAsDecimalFormattedString(value: Int) -> String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
+        return numberFormatter.string(from: NSNumber(value:value))
     }
 
 }

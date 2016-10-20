@@ -120,7 +120,7 @@
                     <navigationItem key="navigationItem" id="x5q-EH-pP8">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="0iE-lu-sNx">
                             <connections>
-                                <segue destination="Lag-8W-96O" kind="presentation" identifier="RepoResultsToSettings" id="1ob-f4-Zw6"/>
+                                <segue destination="Lag-8W-96O" kind="presentation" identifier="RepoResultsToSettings" modalTransitionStyle="coverVertical" id="1ob-f4-Zw6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

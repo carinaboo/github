@@ -12,4 +12,11 @@ import Foundation
 struct GithubRepoSearchSettings {
     var searchString: String?
     var minStars = 0
+    
+    init(searchString: String?, minStars: Int) {
+        if let searchString = searchString {
+            self.searchString = searchString
+        }
+        self.minStars = minStars
+    }
 }

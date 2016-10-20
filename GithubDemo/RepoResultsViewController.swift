@@ -10,10 +10,10 @@ import UIKit
 import MBProgressHUD
 
 // Main ViewController
-class RepoResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RepoResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, RepoSettingsViewControllerDelegate {
 
     var searchBar: UISearchBar!
-    var searchSettings = GithubRepoSearchSettings()
+    var searchSettings = GithubRepoSearchSettings(searchString: nil, minStars: 0)
 
     var repos: [GithubRepo]!
     
@@ -85,17 +85,25 @@ class RepoResultsViewController: UIViewController, UITableViewDataSource, UITabl
         return cell
     }
 
+// MARK: - RepoSettingsViewControllerDelegate
+    func didSaveSearchSettings(sender: RepoSettingsViewController,
+                               searchSettings: GithubRepoSearchSettings) {
+        self.searchSettings = searchSettings
+        doSearch()
+    }
+    
 // MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "RepoResultsToSettings") {
-            let repoSettingsVC = segue.destination as! RepoSettingsViewController
-//            let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell)
+            let repoResultsVC = segue.destination as! RepoSettingsViewController
+            repoResultsVC.delegate = self
+            repoResultsVC.searchSettings = searchSettings
         }
     }
 }
 
-// SearchBar methods
+// MARK: - UISearchBarDelegate
 extension RepoResultsViewController: UISearchBarDelegate {
 
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
