@@ -18,6 +18,9 @@ class RepoCell: UITableViewCell {
     @IBOutlet weak var starsLabel: UILabel!
     @IBOutlet weak var forksLabel: UILabel!
     
+    @IBOutlet weak var starsIcon: UIImageView!
+    @IBOutlet weak var forksIcon: UIImageView!
+
     func setData(githubRepo: GithubRepo) {
         if let ownerAvatar = githubRepo.ownerAvatarURL {
            self.avatarImageView.setImageWith(URL(string: ownerAvatar)!);

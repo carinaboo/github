@@ -25,6 +25,10 @@ class RepoResultsViewController: UIViewController, UITableViewDataSource, UITabl
         // Set UITableView data source and delegate
         tableView.dataSource = self;
         tableView.delegate = self;
+        
+        // Auto size cells
+//        tableView.estimatedRowHeight = 200.0
+//        tableView.rowHeight = UITableViewAutomaticDimension
 
         // Initialize the UISearchBar
         searchBar = UISearchBar()
@@ -81,6 +85,14 @@ class RepoResultsViewController: UIViewController, UITableViewDataSource, UITabl
         return cell
     }
 
+// MARK: - Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "RepoResultsToSettings") {
+            let repoSettingsVC = segue.destination as! RepoSettingsViewController
+//            let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell)
+        }
+    }
 }
 
 // SearchBar methods
